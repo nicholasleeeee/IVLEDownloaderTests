@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+   ui->setupUi(this);
     webviewDialog = new QDialog(this);
     webviewDialog->setLayout(new QBoxLayout(QBoxLayout::LeftToRight));
     webviewDialog->setAttribute(Qt::WA_QuitOnClose,false);
@@ -27,7 +27,20 @@ MainWindow::MainWindow(QWidget *parent) :
     webviewDialog->layout()->addWidget(webView);
     webviewDialog->layout()->setMargin(0);
     // connect(webView, SIGNAL(loadFinished(bool)), this, SLOT(onWebviewLoaded()));
+    //SetMyValue("KEY","NULL");
+    if (GetMyValue("KEY","NULL")=="NULL"){
+            qDebug()<<QString("HELLO");
+            on_pushButton_2_clicked();
+            on_pushButton_clicked();
+            qDebug()<<GetMyValue("KEY","Does not exist");
+            QString keys=GetMyValue("KEY","h").toString();
+            qDebug()<<keys;
 
+
+    } else {
+        QString keys=GetMyValue("KEY","h").toString();
+        qDebug()<<keys;
+    }
 
 
 
@@ -76,16 +89,11 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    if (true){
+
     webView->setUrl(QString("https://ivle.nus.edu.sg/LAPI/default.aspx").arg("EaLNhIs72xzNhdl9ai6Tr"));
     //webviewDialog->setWindowModality(Qt::ApplicationModal);
     //setting modality cause the cursor to disappear in textbox...
     webviewDialog->show();
-
-    } else {
-
-    }
-
     //s->show();
 }
 
@@ -111,7 +119,7 @@ void MainWindow::parse(bool)
     //setting modality cause the cursor to disappear in textbox...
     // webviewDialog->show();
     SetMyValue("KEY",APIKEY);
-    qDebug()<<GetMyValue("KEY","Does not exist");
+    // qDebug()<<GetMyValue("KEY","Does not exist");
 
 }
 
@@ -120,6 +128,7 @@ void MainWindow::on_pushButton_3_clicked()
 {
 
     //qDebug()<<GetMyValue("KEY","Does not exist");
-    QString keys=GetMyValue("KEY","h").toString();
-    qDebug()<<keys;
+    //QString keys=GetMyValue("KEY","h").toString();
+    //qDebug()<<keys;
+    SetMyValue("KEY","NULL");
 }
