@@ -41,3 +41,6 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     secondscreen.ui
+
+DISTFILES += \
+    apikey.txt

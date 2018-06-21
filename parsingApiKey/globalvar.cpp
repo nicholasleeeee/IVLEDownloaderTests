@@ -1,3 +1,3 @@
 #include "globalvar.h"
 
-QString APIKEY="WORKED";
+ QString APIKEY="WORKED";
