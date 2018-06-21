@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "globalvar.h"
 #include <QWebElement>
 #include <QtWebKit>
 #include <QDebug>
@@ -53,10 +54,13 @@ void MainWindow::parse(bool)
 //    qDebug()<<secondParagraph.toPlainText();
     QWebElement key = doc.findFirst("b");//next step to figure out how to log in into ivle
     qDebug()<< QString(key.toPlainText());
-    webView->setUrl(QString("https://ivle.nus.edu.sg/api/login/?apikey=%1").arg(APIKEY));
+    APIKEY = key.toPlainText();
+  qDebug()<<QString("APIKEY is ");
+  qDebug()<< QString(key.toPlainText());
+   // webView->setUrl(QString("https://ivle.nus.edu.sg/api/login/?apikey=%1").arg(APIKEY));
     //webviewDialog->setWindowModality(Qt::ApplicationModal);
     //setting modality cause the cursor to disappear in textbox...
-    webviewDialog->show();
+    // webviewDialog->show();
 }
 
 void MainWindow::on_pushButton_2_clicked()
