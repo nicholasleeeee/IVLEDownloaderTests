@@ -1,6 +1,5 @@
 #include "externalpageparser.h"
 
-
 ExternalPageParser::ExternalPageParser(const Config& c, QObject *parent) :
     QObject(parent)
 {

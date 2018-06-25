@@ -28,6 +28,20 @@ MainWindow::MainWindow(QWidget *parent) :
     webView = new QWebView(webviewDialog);
     webviewDialog->layout()->addWidget(webView);
     webviewDialog->layout()->setMargin(0);
+
+    if (GetMyValue("KEY","NULL")=="NULL"){
+            qDebug()<<QString("HELLO");
+            getAPIkey();
+            ivleLoginPage();
+            qDebug()<<GetMyValue("KEY","Does not exist");
+            QString keys=GetMyValue("KEY","h").toString();
+            qDebug()<<keys;
+
+
+    } else {
+        QString keys=GetMyValue("KEY","h").toString();
+        qDebug()<<keys;
+    }
 }
 
 MainWindow::~MainWindow()
@@ -36,16 +50,16 @@ MainWindow::~MainWindow()
 }
 
 //Brings out login page
-void MainWindow::on_pushButton_clicked()
+void MainWindow::ivleLoginPage()
 {
-    if (APIKEY==" "){
+
     webView->setUrl(QString("https://ivle.nus.edu.sg/LAPI/default.aspx").arg("EaLNhIs72xzNhdl9ai6Tr"));
     webviewDialog->show();
-    }
+
 }
 
 // Navigates to the page that creates an APIKEY based on each user
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::getAPIkey()
 {
     QUrl url("https://ivle.nus.edu.sg/LAPI/default.aspx");//url to obtain the APIKEY
     webView->setUrl(url);
@@ -84,13 +98,14 @@ void MainWindow::SetMyValue(QString key, QVariant value)
 //Set apikey to null
 void MainWindow::on_pushButton_3_clicked()
 {
-    APIKEY = " ";
+   SetMyValue("KEY","NULL");
 }
 
 //Print global variable APIKEY
 void MainWindow::on_pushButton_4_clicked()
 {
-    qDebug()<<APIKEY;
+    QString keys=GetMyValue("KEY","h").toString();
+    qDebug()<<keys;
 }
 
 

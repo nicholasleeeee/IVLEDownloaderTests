@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QtNetwork>
-#include <QtWebit>
+#include <QtWebKit>
 #include <QWebPage>
 #include <QWebFrame>
 #include "promise.h"

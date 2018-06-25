@@ -2,7 +2,6 @@
 
 #include <QDebug>
 
-
 Promise::Promise(QObject *parent) :
     QObject(parent)
 {

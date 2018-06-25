@@ -1,6 +1,5 @@
 #include "lapi.h"
 
-
 Lapi::Lapi(QString token, QObject *parent) :
     QObject(parent)
 {
@@ -76,7 +75,7 @@ void Lapi::ajaxGet(const QNetworkRequest& re,
 Promise* Lapi::ajaxGet(const QNetworkRequest& re)
 {
     auto p = new Promise(this);
-    ajaxGet(re, [=](QVariant data){//ajax calls, so jquery
+    ajaxGet(re, [=](QVariant data){
         p->resolve(data);
     }, [=](QNetworkReply::NetworkError error){
         p->reject(error);

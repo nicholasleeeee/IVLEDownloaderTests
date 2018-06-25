@@ -2,7 +2,6 @@
 #include "ui_settingsdialog.h"
 #include <QDebug>
 
-
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog)
@@ -17,6 +16,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     webviewDialog->layout()->addWidget(webView);
     webviewDialog->layout()->setMargin(0);
     connect(webView, SIGNAL(loadFinished(bool)), this, SLOT(onWebviewLoaded()));
+
 
     adialog = new AdvancedDialog(this);
     connect(adialog, &AdvancedDialog::configSaved, this, &SettingsDialog::configSaved);
@@ -40,7 +40,6 @@ void SettingsDialog::onWebviewLoaded(){
 
 void SettingsDialog::on_pushButton_clicked()
 {
-    //webView->setUrl(QString("https://ivle.nus.edu.sg/api/Lapi.svc/Validate?APIKey={System.String}&Token={System.String}").arg(APIKEY));
     webView->setUrl(QString("https://ivle.nus.edu.sg/api/login/?apikey=%1").arg(APIKEY));
     //webviewDialog->setWindowModality(Qt::ApplicationModal);
     //setting modality cause the cursor to disappear in textbox...
