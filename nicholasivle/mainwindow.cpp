@@ -1,3 +1,4 @@
+//The file that shows all the variables and methods used in the class MainWindow, the window that pops up when the code is first executed. This class is called in main.cpp and an object is created.
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "globalvar.h"
@@ -14,14 +15,14 @@
 #include <QSettings>
 #include <QCoreApplication>
 
-
+//Constructor
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // webview for ivle login page
-    webviewDialog = new QDialog(this);
+    // webviewDialog for ivle login page
+    webviewDialog = new QDialog(this);// an object that is shown in the UI, code below will set the settings of the Dialog box seen
     webviewDialog->setLayout(new QBoxLayout(QBoxLayout::LeftToRight));
     webviewDialog->setAttribute(Qt::WA_QuitOnClose,false);
     webView = new QWebView(webviewDialog);
