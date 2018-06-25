@@ -15,7 +15,7 @@
 #include <QSettings>
 #include <QCoreApplication>
 
-//Constructor
+//Constructor that creates a webviewDialog
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
