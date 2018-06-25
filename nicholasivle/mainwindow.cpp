@@ -44,19 +44,20 @@ void MainWindow::on_pushButton_clicked()
     }
 }
 
-// Enters link to print API key in parse function
+// Navigates to the page that creates an APIKEY based on each user
 void MainWindow::on_pushButton_2_clicked()
 {
-    QUrl url("https://ivle.nus.edu.sg/LAPI/default.aspx");
+    QUrl url("https://ivle.nus.edu.sg/LAPI/default.aspx");//url to obtain the APIKEY
     webView->setUrl(url);
+    //Signals and slot function that ensures that the webpage is loaded finish before executing the parse function
     connect(webView, SIGNAL(loadFinished(bool)), SLOT(parse(bool)));
 }
 
-//From pushButton_2 function
+//Parsing function that uses QSettings,QWebView,QWebFrame and QWebElement to extract the APIKEY from parsing HTML code on the webpage that generates the APIKEY
 void MainWindow::parse(bool){
     QWebFrame *frameInner = webView->page()->mainFrame();
     QWebElement doc = frameInner->documentElement();
-    QWebElement key = doc.findFirst("b");
+    QWebElement key = doc.findFirst("b");//function to find the first element in the HTML tag <b>
     APIKEY = key.toPlainText();
     SetMyValue("KEY",APIKEY);
     qDebug()<<GetMyValue("KEY","Does not exist");
@@ -64,20 +65,20 @@ void MainWindow::parse(bool){
     qDebug()<<keys;
 }
 
-//Settings to store API from USER
+//A collection of functions that use QSettings to store settings variables. This stores settings in the registry of the computer and hence permanent even after the app is closed
 QSettings* MainWindow:: InitRegSettings()
 {
-QSettings* regSett;
-regSett = new QSettings("Organization-name","Project-name");
-return regSett;
+    QSettings* regSett;
+    regSett = new QSettings("Organization-name","Project-name");
+    return regSett;
 }
 void MainWindow::SetMyValue(QString key, QVariant value)
 {
-InitRegSettings()->setValue(key,value); //Store value of user
+    InitRegSettings()->setValue(key,value); //Store value of key defined by user
 }
-QVariant MainWindow:: GetMyValue(QString key, QVariant defaultValue)
+    QVariant MainWindow:: GetMyValue(QString key, QVariant defaultValue)
 {
-return InitRegSettings()->value(key,defaultValue);//Get value of user
+    return InitRegSettings()->value(key,defaultValue);//Get value of a key-value pair
 }
 
 //Set apikey to null
@@ -86,7 +87,7 @@ void MainWindow::on_pushButton_3_clicked()
     APIKEY = " ";
 }
 
-//Print apikey
+//Print global variable APIKEY
 void MainWindow::on_pushButton_4_clicked()
 {
     qDebug()<<APIKEY;
