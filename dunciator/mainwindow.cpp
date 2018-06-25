@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "globalvar.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -126,11 +127,78 @@ MainWindow::MainWindow(QWidget *parent) :
         settingsDialog->setDlText(QString("Download to: %1").arg(settings->directory()));
         processToken(settings->token());
     }
+
+    webviewDialog = new QDialog(this);// an object that is shown in the UI, code below will set the settings of the Dialog box seen
+    webviewDialog->setLayout(new QBoxLayout(QBoxLayout::LeftToRight));
+    webviewDialog->setAttribute(Qt::WA_QuitOnClose,false);
+    webView = new QWebView(webviewDialog);
+    webviewDialog->layout()->addWidget(webView);
+    webviewDialog->layout()->setMargin(0);
+    //SetMyValue("KEY","NULL");
+    if (GetMyValue("KEY","NULL")=="NULL"){
+            qDebug()<<QString("HELLO");
+            getAPIkey();
+            ivleLoginPage();
+            qDebug()<<GetMyValue("KEY","Does not exist");
+            QString keys=GetMyValue("KEY","h").toString();
+            qDebug()<<keys;
+
+
+    } else {
+        QString keys=GetMyValue("KEY","h").toString();
+        qDebug()<<keys;
+    }
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::ivleLoginPage()
+{
+
+    webView->setUrl(QString("https://ivle.nus.edu.sg/LAPI/default.aspx").arg("EaLNhIs72xzNhdl9ai6Tr"));
+    webviewDialog->show();
+
+}
+
+// Navigates to the page that creates an APIKEY based on each user
+void MainWindow::getAPIkey()
+{
+    QUrl url("https://ivle.nus.edu.sg/LAPI/default.aspx");//url to obtain the APIKEY
+    webView->setUrl(url);
+    //Signals and slot function that ensures that the webpage is loaded finish before executing the parse function
+    connect(webView, SIGNAL(loadFinished(bool)), SLOT(parse(bool)));
+}
+
+//Parsing function that uses QSettings,QWebView,QWebFrame and QWebElement to extract the APIKEY from parsing HTML code on the webpage that generates the APIKEY
+void MainWindow::parse(bool){
+    QWebFrame *frameInner = webView->page()->mainFrame();
+    QWebElement doc = frameInner->documentElement();
+    QWebElement key = doc.findFirst("b");//function to find the first element in the HTML tag <b>
+    APIKEY = key.toPlainText();
+    SetMyValue("KEY",APIKEY);
+    qDebug()<<GetMyValue("KEY","Does not exist");
+    QString keys=GetMyValue("KEY","h").toString();
+    qDebug()<<keys;
+}
+
+//A collection of functions that use QSettings to store settings variables. This stores settings in the registry of the computer and hence permanent even after the app is closed
+QSettings* MainWindow:: InitRegSettings()
+{
+    QSettings* regSett;
+    regSett = new QSettings("Organization-name","Project-name");
+    return regSett;
+}
+void MainWindow::SetMyValue(QString key, QVariant value)
+{
+    InitRegSettings()->setValue(key,value); //Store value of key defined by user
+}
+    QVariant MainWindow:: GetMyValue(QString key, QVariant defaultValue)
+{
+    return InitRegSettings()->value(key,defaultValue);//Get value of a key-value pair
 }
 
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason){

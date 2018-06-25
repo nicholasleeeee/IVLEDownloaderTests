@@ -18,6 +18,14 @@
 #include "recentfileaction.h"
 #include "announcementsmenu.h"
 #include "externalpageparser.h"
+#include <QtWebKit>
+#include <QtWebKitWidgets>
+#include <QFileDialog>
+#include <QCheckBox>
+#include <QtWidgets>
+#include <QString>
+#include <QVariant>
+#include <QSettings>
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +55,13 @@ private slots:
     void menuToShow();
     void openFolder();
     void processAnnouncements(QVariantList);
+    void ivleLoginPage();
+    void getAPIkey();
+    void parse(bool);
+
+    QSettings* InitRegSettings();
+    void SetMyValue(QString key, QVariant value);
+    QVariant GetMyValue(QString key, QVariant defaultValue);
 
 private:
     Ui::MainWindow *ui;
@@ -65,6 +80,8 @@ private:
     AnnouncementsMenu* announcements;
     recentFileAction* recents[MAXRECENT];
     ExternalPageParser* parser;
+    QWebView* webView;
+    QDialog* webviewDialog;
 };
 
 #endif // MAINWINDOW_H

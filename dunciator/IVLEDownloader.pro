@@ -17,7 +17,7 @@ TARGET = IVLEDownloader
 TEMPLATE = app
 
 
-DEFINES += APIKEY=\\\"dy1R6cs39qzjQamrIzX6U\\\" \
+DEFINES +=  QT_DEPRECATED_WARNINGS\
             MAXRECENT=5
 
 SOURCES += main.cpp\
@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     advanceddialog.cpp \
     lapi.cpp \
     promise.cpp \
-    externalpageparser.cpp
+    externalpageparser.cpp \
+    globalvar.cpp
 
 HEADERS  += mainwindow.h \
     settingsdialog.h \
@@ -45,7 +46,8 @@ HEADERS  += mainwindow.h \
     advanceddialog.h \
     lapi.h \
     promise.h \
-    externalpageparser.h
+    externalpageparser.h \
+    globalvar.h
 
 FORMS    += mainwindow.ui \
     settingsdialog.ui \
