@@ -1,6 +1,7 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 #include <QDebug>
+#include "globalvar.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),

@@ -1,4 +1,5 @@
 #include "lapi.h"
+#include "globalvar.h"
 
 Lapi::Lapi(QString token, QObject *parent) :
     QObject(parent)
