@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    APIKEY=GetMyValue("KEY","NULL").toString();
     this->setWindowFlags((Qt::WindowFlags) (Qt::Window | Qt::WindowStaysOnTopHint | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint  & (~Qt::WindowFullscreenButtonHint)) );
     ui->setupUi(this);
     this->setAttribute(Qt::WA_QuitOnClose,false);
@@ -135,10 +136,11 @@ MainWindow::MainWindow(QWidget *parent) :
     webviewDialog->layout()->addWidget(webView);
     webviewDialog->layout()->setMargin(0);
     //SetMyValue("KEY","NULL");
-    if (GetMyValue("KEY","NULL")=="NULL"){
+    if (GetMyValue("KEY","NULL").toString().length()!=21){
             qDebug()<<QString("HELLO");
-            getAPIkey();
             ivleLoginPage();
+            getAPIkey();
+
             qDebug()<<GetMyValue("KEY","Does not exist");
             QString keys=GetMyValue("KEY","h").toString();
             qDebug()<<keys;
