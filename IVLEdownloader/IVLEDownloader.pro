@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     lapi.cpp \
     promise.cpp \
     externalpageparser.cpp \
-    globalvar.cpp
+    globalvar.cpp \
+    downloaderui.cpp
 
 HEADERS  += mainwindow.h \
     settingsdialog.h \
@@ -47,11 +48,13 @@ HEADERS  += mainwindow.h \
     lapi.h \
     promise.h \
     externalpageparser.h \
-    globalvar.h
+    globalvar.h \
+    downloaderui.h
 
 FORMS    += mainwindow.ui \
     settingsdialog.ui \
-    advanceddialog.ui
+    advanceddialog.ui \
+    downloaderui.ui
 
 RESOURCES += \
     res.qrc

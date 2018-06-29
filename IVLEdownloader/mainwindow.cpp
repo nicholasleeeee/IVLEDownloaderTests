@@ -1,14 +1,19 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "globalvar.h"
+#include "downloaderui.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    //creating the UI
     APIKEY=GetMyValue("KEY","NULL").toString();
+
     this->setWindowFlags((Qt::WindowFlags) (Qt::Window | Qt::WindowStaysOnTopHint | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint  & (~Qt::WindowFullscreenButtonHint)) );
     ui->setupUi(this);
+
+
     this->setAttribute(Qt::WA_QuitOnClose,false);
 
     QDir d = QStandardPaths::standardLocations(QStandardPaths::DataLocation)[0];
@@ -137,18 +142,22 @@ MainWindow::MainWindow(QWidget *parent) :
     webviewDialog->layout()->setMargin(0);
     //SetMyValue("KEY","NULL");
     if (GetMyValue("KEY","NULL").toString().length()!=21){
-            qDebug()<<QString("HELLO");
-            ivleLoginPage();
-            getAPIkey();
-
-            qDebug()<<GetMyValue("KEY","Does not exist");
-            QString keys=GetMyValue("KEY","h").toString();
-            qDebug()<<keys;
-
+        ivleLoginPage();
+        getAPIkey();
+        qDebug()<<GetMyValue("KEY","Does not exist");
+        QString keys=GetMyValue("KEY","h").toString();
+        qDebug()<<keys;
+        DownloaderUI UI;
+        UI.setModal(true);
+        UI.exec();
 
     } else {
         QString keys=GetMyValue("KEY","h").toString();
         qDebug()<<keys;
+        DownloaderUI UI;
+        UI.setModal(true);
+        UI.exec();
+
     }
 
 }

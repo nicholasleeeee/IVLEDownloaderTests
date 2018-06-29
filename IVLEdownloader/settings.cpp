@@ -1,4 +1,5 @@
 #include "settings.h"
+#include "globalvar.h"
 
 Settings::Settings(QDir baseDir, QObject *parent) :
     QObject(parent)
@@ -6,6 +7,7 @@ Settings::Settings(QDir baseDir, QObject *parent) :
     settingsPrivate = new QSettings("YYJHAO","IVLEDownloader");
     _token = settingsPrivate->value("token","").toString();
     _directory = settingsPrivate->value("directory","").toString();
+    DIRECTORY=settingsPrivate->value("directory","").toString();
     _notify = settingsPrivate->value("notify",true).toBool();
     _notifyAnnouncement = settingsPrivate->value("notifyAnnouncement",true).toBool();
     _recents = settingsPrivate->value("recentFiles",QStringList()).toStringList();

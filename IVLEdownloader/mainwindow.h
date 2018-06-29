@@ -18,6 +18,7 @@
 #include "recentfileaction.h"
 #include "announcementsmenu.h"
 #include "externalpageparser.h"
+#include "downloaderui.h"
 #include <QtWebKit>
 #include <QtWebKitWidgets>
 #include <QFileDialog>
@@ -82,6 +83,7 @@ private:
     ExternalPageParser* parser;
     QWebView* webView;
     QDialog* webviewDialog;
+    DownloaderUI* UI;
 };
 
 #endif // MAINWINDOW_H

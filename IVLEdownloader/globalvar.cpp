@@ -2,3 +2,4 @@
 #include "globalvar.h"
 
 QString APIKEY= "NULL";
+QString DIRECTORY="NULL";
