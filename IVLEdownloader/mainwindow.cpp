@@ -147,9 +147,9 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug()<<GetMyValue("KEY","Does not exist");
         QString keys=GetMyValue("KEY","h").toString();
         qDebug()<<keys;
-        DownloaderUI UI;
-        UI.setModal(true);
-        UI.exec();
+        //DownloaderUI UI;
+        //UI.setModal(true);
+        //UI.exec();
 
     } else {
         QString keys=GetMyValue("KEY","h").toString();
