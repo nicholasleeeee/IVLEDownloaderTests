@@ -53,6 +53,14 @@ DownloaderUI::DownloaderUI(QWidget *parent) :
     ModulesPageLoader();//Load announcement modules pages
     poll(); //Timer to poll every 1 hour
     ui->webView->load(QUrl("https://www.nuswhispers.com/home/")); //Add NUSWhispers
+
+    ui->webView_outlook->load(QUrl("https://outlook.office365.com/owa/?realm=u.nus.edu"));
+
+
+
+
+
+
     setTableHeaders();//Adding CAP calculator
     //Add Timetable
     QString dir=DIRECTORY;
