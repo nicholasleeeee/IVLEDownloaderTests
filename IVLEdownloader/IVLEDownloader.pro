@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui\
+QT       += core gui sql\
             widgets\
             webkitwidgets\
             network
@@ -34,7 +34,12 @@ SOURCES += main.cpp\
     promise.cpp \
     externalpageparser.cpp \
     globalvar.cpp \
-    downloaderui.cpp
+    downloaderui.cpp \
+    qtjson.cpp \
+    form.cpp \
+    dialog.cpp \
+    additem.cpp \
+    item.cpp
 
 HEADERS  += mainwindow.h \
     settingsdialog.h \
@@ -49,12 +54,21 @@ HEADERS  += mainwindow.h \
     promise.h \
     externalpageparser.h \
     globalvar.h \
-    downloaderui.h
+    downloaderui.h \
+    qtjson.h \
+    form.h \
+    dialog.h \
+    additem.h \
+    item.h
 
 FORMS    += mainwindow.ui \
     settingsdialog.ui \
     advanceddialog.ui \
-    downloaderui.ui
+    downloaderui.ui \
+    form.ui \
+    dialog.ui \
+    additem.ui \
+    item.ui
 
 RESOURCES += \
     res.qrc
