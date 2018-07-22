@@ -37,45 +37,37 @@ DownloaderUI::DownloaderUI(QWidget *parent) :
     ui(new Ui::DownloaderUI)
 {
     ui->setupUi(this);
-
-    //Datebase creation
-    QString DB=DIRECTORY;
-    DB.append("/db.sqlite");
-    makeDB(DB);//makes the Database based on path DB
-    pull();//draws out all information for to-do-list
     setupFiles(DIRECTORY);//FILES TAB //change directory to make it your own path
+    initDB();//Datebase creation & to-do-list implementation
+    initParser();//ANNOUNCEMENT UI && Exams parsing UI
+    ui->webView->load(QUrl("https://www.nuswhispers.com/home/")); //Add NUSWhispers
+    setTableHeaders();//Adding CAP calculator
+    startOutlook();
+
+}
+void DownloaderUI::initParser()
+{
     setExamTable();//Sets exams tabs information
-    //ANNOUNCEMENT UI
     connect(innerPage, SIGNAL(loadFinished(bool)), SLOT(parse(bool)));//connects with modules code and ID parsing
-    connect(innerPage2, SIGNAL(loadFinished(bool)), SLOT(parse2(bool)));//connects with announcement parsing 
+    connect(innerPage2, SIGNAL(loadFinished(bool)), SLOT(parse2(bool)));//connects with announcement parsing
     connect(innerPage3, SIGNAL(loadFinished(bool)), SLOT(parse3(bool)));//connects with exam details parsing
     removeTabs();//removes all the default tabs
     ModulesPageLoader();//Load announcement modules pages
     poll(); //Timer to poll every 1 hour
-    ui->webView->load(QUrl("https://www.nuswhispers.com/home/")); //Add NUSWhispers
-
-    ui->webView_outlook->load(QUrl("https://outlook.office365.com/owa/?realm=u.nus.edu"));
-
-
-
-
-
-
-    setTableHeaders();//Adding CAP calculator
-    //Add Timetable
-    QString dir=DIRECTORY;
-    dir.append("/My Timetable.png");
-    QPixmap pic(dir);
-    ui->label->setPixmap(pic.scaled(1000,450,Qt::KeepAspectRatio,Qt::SmoothTransformation));
 }
+
 //Preprocessing that clears default tabs
 void DownloaderUI::removeTabs()
 {
+    qDebug()<<ui->tabWidget_2->count();
     ui->tabWidget_2->setCurrentIndex(0);
     ui->tabWidget_2->removeTab(2);
     ui->tabWidget_2->removeTab(1);
     ui->tabWidget_2->removeTab(0);
+    qDebug()<<"Test here";
+    qDebug()<<ui->tabWidget_2->count();
 }
+
 //FILES UI
 void DownloaderUI::setupFiles(QString sPath)
 {
@@ -85,11 +77,28 @@ void DownloaderUI::setupFiles(QString sPath)
     ui->treeView->setModel(this->dirmodel);
     dirmodel->setRootPath(sPath);
     ui->treeView->setRootIndex(dirmodel->index(sPath));
-
     //Creates the FileSystemModel for the listview, the right file widget
     listmodel=new QFileSystemModel(this);
     listmodel->setRootPath(sPath);
     ui->listView->setModel(listmodel);
+}
+
+//For the folder view on the left
+void DownloaderUI::on_treeView_clicked(const QModelIndex &index)
+{
+    QString sPath=dirmodel->fileInfo(index).absoluteFilePath();
+    ui->listView->setRootIndex(listmodel->setRootPath(sPath));
+}
+//For the documents view on the right
+void DownloaderUI::on_listView_clicked(const QModelIndex &index)
+{
+    QString sPath=listmodel->fileInfo(index).absoluteFilePath();
+    QDesktopServices::openUrl(QUrl::fromLocalFile(sPath));
+}
+
+DownloaderUI::~DownloaderUI()
+{
+    delete ui;
 }
 
 //ANNOUNCEMENT UI
@@ -99,7 +108,6 @@ void DownloaderUI::poll()
 QTimer *timer = new QTimer(this);
 QObject::connect(timer, SIGNAL(timeout()), this, SLOT(ModulesPageLoader()));
 timer->start(3600000); //time specified in ms to poll modulesPageLoader every 1 hour first
-
 }
 
 void DownloaderUI::ModulesPageLoader()
@@ -255,26 +263,6 @@ void DownloaderUI::addModulesTabs()
     }
 }
 
-//DOWNLOADED FILES UI
-
-//For the folder view on the left
-void DownloaderUI::on_treeView_clicked(const QModelIndex &index)
-{
-    QString sPath=dirmodel->fileInfo(index).absoluteFilePath();
-    ui->listView->setRootIndex(listmodel->setRootPath(sPath));
-}
-//For the documents view on the right
-void DownloaderUI::on_listView_clicked(const QModelIndex &index)
-{
-    QString sPath=listmodel->fileInfo(index).absoluteFilePath();
-    QDesktopServices::openUrl(QUrl::fromLocalFile(sPath));
-}
-
-DownloaderUI::~DownloaderUI()
-{
-    delete ui;
-}
-
 //Exam Details UI
 
 void DownloaderUI::setExamTable()
@@ -336,11 +324,6 @@ void DownloaderUI::parse3(bool)
         cnt2++;//iterates to continue the loop
         continued2();
 
-}
-
-void DownloaderUI::on_pushButton_clicked()
-{
-    QDesktopServices::openUrl(QUrl("https://nusmods.com/timetable/sem-1"));
 }
 
 //CAP CALCULATOR UI
@@ -429,18 +412,27 @@ void DownloaderUI::on_pushButton_5_clicked()
     float pass=(2.0*160-current)/unitsleft;
     QString string;
     string.append("The numbers reflected are the minimum average grade you need for the remaining modular credits units towards 160mcs:\n\n");
-    string.append("To get 1st Class Honours(CPA=4.5) you need "+QString::number(firstclass)+"\n\n");
-    string.append("To get 2nd Upper Class Honours(CPA=4.0) you need "+QString::number(secondclass)+"\n\n");
-    string.append("To get 2nd Lower Class Honours(CPA=3.5) you need "+QString::number(secondlower)+"\n\n");
-    string.append("To get 3rd Class Honours(CPA=3.0) you need "+QString::number(thirdclass)+"\n\n");
-    string.append("To get pass(CPA=2.0) you need "+QString::number(pass)+"\n\n");
+    string.append("To get 1st Class Honours(CAP=4.5) you need "+QString::number(firstclass)+"\n\n");
+    string.append("To get 2nd Upper Class Honours(CAP=4.0) you need "+QString::number(secondclass)+"\n\n");
+    string.append("To get 2nd Lower Class Honours(CAP=3.5) you need "+QString::number(secondlower)+"\n\n");
+    string.append("To get 3rd Class Honours(CAP=3.0) you need "+QString::number(thirdclass)+"\n\n");
+    string.append("To get pass(CAP=2.0) you need "+QString::number(pass)+"\n\n");
     string.append("JiaYou and all the Best");
     QMessageBox::information(this,"CAP Goals",string);
 }
 //For the To-Do-List UI
 
+//function to intialise the to-do-list
+void DownloaderUI::initDB()
+{
+    QString DB=DIRECTORY;
+    DB.append("/db.sqlite");
+    makeDB(DB);//makes the Database based on path DB
+    pull();//draws out all information for to-do-list
+
+}
 //Makes new items
-void DownloaderUI::on_pushButton_4_clicked()
+void DownloaderUI::on_pushButton_6_clicked()
 {
     AddItem add;
     int outcome;
@@ -454,7 +446,7 @@ void DownloaderUI::on_pushButton_4_clicked()
     i->setText(item);
     i->setProgress(0);
     connect(i,SIGNAL(changeVal(QString,int)),this,SLOT(update(QString,int)));
-    ui->verticalLayout_12->addWidget(i);
+    ui->verticalLayout_6->addWidget(i);
     addvalues(item,0);
 }
 //Add values to the DB
@@ -511,7 +503,7 @@ void DownloaderUI::pull()
             i->setText(record.value("Item").toString());
             i->setProgress(record.value("Progress").toInt());
             connect(i,SIGNAL(changeVal(QString,int)),this,SLOT(update(QString,int)));
-            ui->verticalLayout_12->addWidget(i);
+            ui->verticalLayout_6->addWidget(i);
         }
     db.close();
 }
@@ -528,5 +520,85 @@ void DownloaderUI::makeDB(QString path)
     if(!qry.exec(query)) qDebug()<<"Query failed or Database already created";
     db.close();
 }
+
+
+//Outlook
+//Opens QSettings and check if username and password exists
+void DownloaderUI::startOutlook(){
+
+    //Opens QSettings, default username and password set to null
+    QSettings settings ("IVLE", "App");
+    settings.beginGroup("userinfo");
+    QString tempUsername= settings.value("tempUsername","null").toString();
+    QString tempPassword = settings.value("tempPassword", "null").toString();
+    settings.endGroup();
+
+    //If Qsettings is null, group box will show for user to key in details
+    if(tempUsername=="null"){
+        ui->webView_2->load(QUrl("https://outlook.office.com/owa/?realm=u.nus.edu"));
+        ui->webView_2->hide();
+
+        connect(this,SIGNAL(login()),this,SLOT(loadOutlook()));
+    //If Qsettings was saved before, outlook will load user details and login
+    } else {
+        ui->groupBox->hide();
+        ui->webView_2->load(QUrl("https://outlook.office.com/owa/?realm=u.nus.edu"));
+        connect(ui->webView_2, SIGNAL(loadFinished(bool)), this, SLOT(loadOutlook()));
+    }
+
+}
+
+//Saves user details into Qsettings and load outlook
+void DownloaderUI::on_pushButton_login_clicked()
+{
+    //Saves line edit username and password into Qsettings and sends out login signal to load Outlook
+    QSettings settings ("IVLE", "App");
+    settings.beginGroup("userinfo");
+    settings.setValue("tempUsername", ui->lineEdit_username->text());
+    settings.setValue("tempPassword", ui->lineEdit_password->text());
+    settings.endGroup();
+    qDebug()<< "temp details saved";
+    startOutlook();
+    emit login();
+
+}
+
+//Inputs Qsettings username and password into outlook url placeholders and login
+void DownloaderUI:: loadOutlook(){
+
+    ui->webView_2->show();
+    ui->groupBox->hide();
+    //calls qsettings
+    QSettings settings ("IVLE", "App");
+    settings.beginGroup("userinfo");
+    QString tempUsername= settings.value("tempUsername","null").toString();
+    QString tempPassword = settings.value("tempPassword", "null").toString();
+    settings.endGroup();
+
+    //inserts username and password into webview
+    ui->webView_2->page()->mainFrame()->evaluateJavaScript(QString("document.getElementById('ContentPlaceHolder1_UsernameTextBox').value = '%1'").arg(tempUsername));
+    ui->webView_2->page()->mainFrame()->evaluateJavaScript(QString("document.getElementById('ContentPlaceHolder1_PasswordTextBox').value = '%1'").arg(tempPassword));
+    ui->webView_2->page()->mainFrame()->evaluateJavaScript(QString("document.getElementById('ContentPlaceHolder1_SubmitButton').click()"));
+
+    disconnect(ui->webView_2, SIGNAL(loadFinished(bool)), this, SLOT(loadOutlook()));
+    disconnect(ui->webView_2, SIGNAL(login()), this, SLOT(loadOutlook()));
+}
+
+//Function resets username and password to null, allowing the user to log in from fresh
+void DownloaderUI::on_pushButton_forgetMe_clicked()
+{
+    QSettings settings ("IVLE", "App");
+    settings.beginGroup("userinfo");
+    settings.setValue("tempUsername", "null");
+    settings.setValue("tempPassword", "null");
+    settings.endGroup();
+    qDebug()<< "forgotten";
+    ui->webView_2->hide();
+    ui->groupBox->show();
+
+}
+
+
+
 
 

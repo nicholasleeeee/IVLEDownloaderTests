@@ -24,6 +24,9 @@ class DownloaderUI : public QDialog
 
 public:
     explicit DownloaderUI(QWidget *parent = 0);
+    void initDB();
+    void initTT();
+    void initParser();
     void storeintolist();
     void continued();
     void continued2();
@@ -53,15 +56,23 @@ private slots:
     void parse3(bool);
     void ModulesPageLoader();
 
-
-    void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
-    void on_pushButton_4_clicked();
+
 
     void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
+    //Outlook functions
+    void on_pushButton_login_clicked();
+    void loadOutlook();
+    void startOutlook();
+    void on_pushButton_forgetMe_clicked();
+
+signals:
+    void login();
 
 private:
     Ui::DownloaderUI *ui;

@@ -41,6 +41,8 @@ public:
     QSpinBox *spinBox;
     QLabel *label_4;
     QSpacerItem *verticalSpacer;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
     QPushButton *pushButton_3;
 
     void setupUi(QDialog *SettingsDialog)
@@ -140,6 +142,16 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
+        pushButton_4 = new QPushButton(SettingsDialog);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+
+        verticalLayout->addWidget(pushButton_4);
+
+        pushButton_5 = new QPushButton(SettingsDialog);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+
+        verticalLayout->addWidget(pushButton_5);
+
         pushButton_3 = new QPushButton(SettingsDialog);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
 
@@ -164,6 +176,8 @@ public:
         label_3->setText(QApplication::translate("SettingsDialog", "Do not download files larger than", 0));
         spinBox->setSuffix(QApplication::translate("SettingsDialog", "mb", 0));
         label_4->setText(QApplication::translate("SettingsDialog", "Note that files that are already downloaded will not be deleted - you will have to do this yourself", 0));
+        pushButton_4->setText(QApplication::translate("SettingsDialog", "IVLE Downloader", 0));
+        pushButton_5->setText(QApplication::translate("SettingsDialog", "Parse API key", 0));
         pushButton_3->setText(QApplication::translate("SettingsDialog", "Extremely hacky advance stuff", 0));
     } // retranslateUi
 

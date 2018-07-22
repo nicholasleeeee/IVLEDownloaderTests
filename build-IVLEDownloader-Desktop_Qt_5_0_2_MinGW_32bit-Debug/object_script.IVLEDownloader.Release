@@ -14,6 +14,12 @@ INPUT(
 ./release\externalpageparser.o
 ./release\globalvar.o
 ./release\downloaderui.o
+./release\qtjson.o
+./release\form.o
+./release\dialog.o
+./release\additem.o
+./release\item.o
+./release\parsing.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
 ./release\moc_settingsdialog.o
@@ -27,5 +33,10 @@ INPUT(
 ./release\moc_lapi.o
 ./release\moc_promise.o
 ./release\moc_externalpageparser.o
+./release\moc_globalvar.o
 ./release\moc_downloaderui.o
+./release\moc_form.o
+./release\moc_dialog.o
+./release\moc_additem.o
+./release\moc_item.o
 );
