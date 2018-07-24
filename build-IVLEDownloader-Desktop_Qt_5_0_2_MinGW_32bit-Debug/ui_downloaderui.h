@@ -68,7 +68,7 @@ public:
     QWidget *tab_4;
     QWebView *webView_2;
     QGroupBox *groupBox;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label;
@@ -104,8 +104,8 @@ public:
         treeView->setWordWrap(false);
         treeView->setExpandsOnDoubleClick(true);
         treeView->header()->setCascadingSectionResizes(true);
-        treeView->header()->setDefaultSectionSize(200);
-        treeView->header()->setMinimumSectionSize(50);
+        treeView->header()->setDefaultSectionSize(250);
+        treeView->header()->setMinimumSectionSize(100);
 
         horizontalLayout->addWidget(treeView);
 
@@ -137,7 +137,7 @@ public:
         horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         tableWidget_2 = new QTableWidget(tab_3);
         tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableWidget_2->sizePolicy().hasHeightForWidth());
@@ -291,6 +291,9 @@ public:
         tableWidget_3->setObjectName(QStringLiteral("tableWidget_3"));
         sizePolicy1.setHeightForWidth(tableWidget_3->sizePolicy().hasHeightForWidth());
         tableWidget_3->setSizePolicy(sizePolicy1);
+        tableWidget_3->horizontalHeader()->setDefaultSectionSize(120);
+        tableWidget_3->verticalHeader()->setDefaultSectionSize(20);
+        tableWidget_3->verticalHeader()->setMinimumSectionSize(30);
 
         gridLayout->addWidget(tableWidget_3, 1, 0, 1, 1);
 
@@ -334,11 +337,12 @@ public:
         QTableWidgetItem *__qtablewidgetitem51 = new QTableWidgetItem();
         tableWidget_4->setItem(4, 1, __qtablewidgetitem51);
         tableWidget_4->setObjectName(QStringLiteral("tableWidget_4"));
-        QSizePolicy sizePolicy2(QSizePolicy::Ignored, QSizePolicy::Minimum);
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(tableWidget_4->sizePolicy().hasHeightForWidth());
         tableWidget_4->setSizePolicy(sizePolicy2);
+        tableWidget_4->horizontalHeader()->setDefaultSectionSize(290);
 
         gridLayout->addWidget(tableWidget_4, 0, 0, 1, 1);
 
@@ -351,24 +355,28 @@ public:
         webView_2 = new QWebView(tab_4);
         webView_2->setObjectName(QStringLiteral("webView_2"));
         webView_2->setGeometry(QRect(9, 26, 1158, 621));
+        sizePolicy1.setHeightForWidth(webView_2->sizePolicy().hasHeightForWidth());
+        webView_2->setSizePolicy(sizePolicy1);
         webView_2->setProperty("url", QVariant(QUrl(QStringLiteral("about:blank"))));
         groupBox = new QGroupBox(tab_4);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(270, 140, 471, 231));
-        widget = new QWidget(groupBox);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(50, 50, 371, 131));
-        verticalLayout_4 = new QVBoxLayout(widget);
+        groupBox->setGeometry(QRect(160, 100, 471, 231));
+        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy1);
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(50, 50, 371, 131));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout_3->addWidget(label);
 
-        lineEdit_username = new QLineEdit(widget);
+        lineEdit_username = new QLineEdit(layoutWidget);
         lineEdit_username->setObjectName(QStringLiteral("lineEdit_username"));
 
         horizontalLayout_3->addWidget(lineEdit_username);
@@ -378,12 +386,12 @@ public:
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         horizontalLayout_6->addWidget(label_2);
 
-        lineEdit_password = new QLineEdit(widget);
+        lineEdit_password = new QLineEdit(layoutWidget);
         lineEdit_password->setObjectName(QStringLiteral("lineEdit_password"));
         lineEdit_password->setEchoMode(QLineEdit::Password);
 
@@ -392,7 +400,7 @@ public:
 
         verticalLayout_4->addLayout(horizontalLayout_6);
 
-        pushButton_login = new QPushButton(widget);
+        pushButton_login = new QPushButton(layoutWidget);
         pushButton_login->setObjectName(QStringLiteral("pushButton_login"));
 
         verticalLayout_4->addWidget(pushButton_login);
