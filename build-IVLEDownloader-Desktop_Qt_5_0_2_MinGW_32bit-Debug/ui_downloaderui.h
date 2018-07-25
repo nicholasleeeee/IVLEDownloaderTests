@@ -15,6 +15,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -66,7 +67,6 @@ public:
     QTableWidget *tableWidget_3;
     QTableWidget *tableWidget_4;
     QWidget *tab_4;
-    QWebView *webView_2;
     QGroupBox *groupBox;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_4;
@@ -77,7 +77,9 @@ public:
     QLabel *label_2;
     QLineEdit *lineEdit_password;
     QPushButton *pushButton_login;
+    QFormLayout *formLayout;
     QPushButton *pushButton_forgetMe;
+    QWebView *webView_2;
     QWidget *tab_5;
     QVBoxLayout *verticalLayout_3;
     QWebView *webView;
@@ -87,6 +89,11 @@ public:
         if (DownloaderUI->objectName().isEmpty())
             DownloaderUI->setObjectName(QStringLiteral("DownloaderUI"));
         DownloaderUI->resize(1200, 700);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(DownloaderUI->sizePolicy().hasHeightForWidth());
+        DownloaderUI->setSizePolicy(sizePolicy);
         verticalLayout = new QVBoxLayout(DownloaderUI);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tabWidget = new QTabWidget(DownloaderUI);
@@ -105,7 +112,9 @@ public:
         treeView->setExpandsOnDoubleClick(true);
         treeView->header()->setCascadingSectionResizes(true);
         treeView->header()->setDefaultSectionSize(250);
+        treeView->header()->setHighlightSections(true);
         treeView->header()->setMinimumSectionSize(100);
+        treeView->header()->setStretchLastSection(true);
 
         horizontalLayout->addWidget(treeView);
 
@@ -137,11 +146,12 @@ public:
         horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         tableWidget_2 = new QTableWidget(tab_3);
         tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
-        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(tableWidget_2->sizePolicy().hasHeightForWidth());
-        tableWidget_2->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(tableWidget_2->sizePolicy().hasHeightForWidth());
+        tableWidget_2->setSizePolicy(sizePolicy1);
+        tableWidget_2->horizontalHeader()->setCascadingSectionResizes(true);
 
         horizontalLayout_8->addWidget(tableWidget_2);
 
@@ -178,11 +188,18 @@ public:
         verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
         tableWidget = new QTableWidget(tab_6);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
-        tableWidget->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
+        //tableWidget->setSizeAdjustPolicy(sizeAdjustPolicy);
+        //tableWidget->setSizePolicy(QAbstractScrollArea::AdjustIgnored);
+        tableWidget->setAlternatingRowColors(true);
+        tableWidget->setWordWrap(false);
+        tableWidget->horizontalHeader()->setCascadingSectionResizes(false);
+        tableWidget->horizontalHeader()->setDefaultSectionSize(200);
+        tableWidget->horizontalHeader()->setMinimumSectionSize(149);
+        tableWidget->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+        tableWidget->horizontalHeader()->setStretchLastSection(false);
+        tableWidget->verticalHeader()->setDefaultSectionSize(50);
+        tableWidget->verticalHeader()->setMinimumSectionSize(50);
 
         verticalLayout_7->addWidget(tableWidget);
 
@@ -221,7 +238,10 @@ public:
         tableWidget_3->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         if (tableWidget_3->rowCount() < 11)
             tableWidget_3->setRowCount(11);
+        QFont font;
+        font.setKerning(true);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        __qtablewidgetitem2->setFont(font);
         tableWidget_3->setVerticalHeaderItem(0, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         tableWidget_3->setVerticalHeaderItem(1, __qtablewidgetitem3);
@@ -289,10 +309,17 @@ public:
         QTableWidgetItem *__qtablewidgetitem34 = new QTableWidgetItem();
         tableWidget_3->setItem(10, 1, __qtablewidgetitem34);
         tableWidget_3->setObjectName(QStringLiteral("tableWidget_3"));
-        sizePolicy1.setHeightForWidth(tableWidget_3->sizePolicy().hasHeightForWidth());
-        tableWidget_3->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(tableWidget_3->sizePolicy().hasHeightForWidth());
+        tableWidget_3->setSizePolicy(sizePolicy);
+        tableWidget_3->setContextMenuPolicy(Qt::NoContextMenu);
+        tableWidget_3->setLineWidth(1);
+        tableWidget_3->setAutoScrollMargin(10);
+        tableWidget_3->setAlternatingRowColors(true);
+        tableWidget_3->setIconSize(QSize(5, 10));
+        tableWidget_3->setSortingEnabled(false);
         tableWidget_3->horizontalHeader()->setDefaultSectionSize(120);
-        tableWidget_3->verticalHeader()->setDefaultSectionSize(20);
+        tableWidget_3->horizontalHeader()->setMinimumSectionSize(47);
+        tableWidget_3->verticalHeader()->setDefaultSectionSize(30);
         tableWidget_3->verticalHeader()->setMinimumSectionSize(30);
 
         gridLayout->addWidget(tableWidget_3, 1, 0, 1, 1);
@@ -337,11 +364,12 @@ public:
         QTableWidgetItem *__qtablewidgetitem51 = new QTableWidgetItem();
         tableWidget_4->setItem(4, 1, __qtablewidgetitem51);
         tableWidget_4->setObjectName(QStringLiteral("tableWidget_4"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Expanding);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(tableWidget_4->sizePolicy().hasHeightForWidth());
         tableWidget_4->setSizePolicy(sizePolicy2);
+        tableWidget_4->setAlternatingRowColors(true);
         tableWidget_4->horizontalHeader()->setDefaultSectionSize(290);
 
         gridLayout->addWidget(tableWidget_4, 0, 0, 1, 1);
@@ -352,17 +380,11 @@ public:
         tabWidget->addTab(tab_6, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
-        webView_2 = new QWebView(tab_4);
-        webView_2->setObjectName(QStringLiteral("webView_2"));
-        webView_2->setGeometry(QRect(9, 26, 1158, 621));
-        sizePolicy1.setHeightForWidth(webView_2->sizePolicy().hasHeightForWidth());
-        webView_2->setSizePolicy(sizePolicy1);
-        webView_2->setProperty("url", QVariant(QUrl(QStringLiteral("about:blank"))));
         groupBox = new QGroupBox(tab_4);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(160, 100, 471, 231));
-        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(50, 50, 371, 131));
@@ -405,9 +427,21 @@ public:
 
         verticalLayout_4->addWidget(pushButton_login);
 
+        formLayout = new QFormLayout(tab_4);
+        formLayout->setObjectName(QStringLiteral("formLayout"));
         pushButton_forgetMe = new QPushButton(tab_4);
         pushButton_forgetMe->setObjectName(QStringLiteral("pushButton_forgetMe"));
-        pushButton_forgetMe->setGeometry(QRect(0, 0, 91, 23));
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, pushButton_forgetMe);
+
+        webView_2 = new QWebView(tab_4);
+        webView_2->setObjectName(QStringLiteral("webView_2"));
+        sizePolicy.setHeightForWidth(webView_2->sizePolicy().hasHeightForWidth());
+        webView_2->setSizePolicy(sizePolicy);
+        webView_2->setProperty("url", QVariant(QUrl(QStringLiteral("about:blank"))));
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, webView_2);
+
         tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QStringLiteral("tab_5"));
@@ -415,6 +449,10 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         webView = new QWebView(tab_5);
         webView->setObjectName(QStringLiteral("webView"));
+        webView->setEnabled(true);
+        sizePolicy.setHeightForWidth(webView->sizePolicy().hasHeightForWidth());
+        webView->setSizePolicy(sizePolicy);
+        webView->setFocusPolicy(Qt::WheelFocus);
         webView->setProperty("url", QVariant(QUrl(QStringLiteral("about:blank"))));
 
         verticalLayout_3->addWidget(webView);
@@ -426,7 +464,7 @@ public:
 
         retranslateUi(DownloaderUI);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(2);
         tabWidget_2->setCurrentIndex(0);
 
 
