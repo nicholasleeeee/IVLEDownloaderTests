@@ -189,8 +189,8 @@ public:
         tableWidget = new QTableWidget(tab_6);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
         sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
-        //tableWidget->setSizeAdjustPolicy(sizeAdjustPolicy);
-        //tableWidget->setSizePolicy(QAbstractScrollArea::AdjustIgnored);
+        tableWidget->setSizePolicy(sizePolicy);
+        //tableWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
         tableWidget->setAlternatingRowColors(true);
         tableWidget->setWordWrap(false);
         tableWidget->horizontalHeader()->setCascadingSectionResizes(false);
