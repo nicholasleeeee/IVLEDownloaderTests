@@ -15,7 +15,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -67,6 +66,7 @@ public:
     QTableWidget *tableWidget_3;
     QTableWidget *tableWidget_4;
     QWidget *tab_4;
+    QVBoxLayout *verticalLayout_5;
     QGroupBox *groupBox;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_4;
@@ -77,9 +77,8 @@ public:
     QLabel *label_2;
     QLineEdit *lineEdit_password;
     QPushButton *pushButton_login;
-    QFormLayout *formLayout;
-    QPushButton *pushButton_forgetMe;
     QWebView *webView_2;
+    QPushButton *pushButton_forgetMe;
     QWidget *tab_5;
     QVBoxLayout *verticalLayout_3;
     QWebView *webView;
@@ -380,14 +379,15 @@ public:
         tabWidget->addTab(tab_6, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
+        verticalLayout_5 = new QVBoxLayout(tab_4);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         groupBox = new QGroupBox(tab_4);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(160, 100, 471, 231));
         sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
         groupBox->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(50, 50, 371, 131));
+        layoutWidget->setGeometry(QRect(320, 50, 481, 181));
         verticalLayout_4 = new QVBoxLayout(layoutWidget);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -427,12 +427,8 @@ public:
 
         verticalLayout_4->addWidget(pushButton_login);
 
-        formLayout = new QFormLayout(tab_4);
-        formLayout->setObjectName(QStringLiteral("formLayout"));
-        pushButton_forgetMe = new QPushButton(tab_4);
-        pushButton_forgetMe->setObjectName(QStringLiteral("pushButton_forgetMe"));
 
-        formLayout->setWidget(0, QFormLayout::LabelRole, pushButton_forgetMe);
+        verticalLayout_5->addWidget(groupBox);
 
         webView_2 = new QWebView(tab_4);
         webView_2->setObjectName(QStringLiteral("webView_2"));
@@ -440,7 +436,12 @@ public:
         webView_2->setSizePolicy(sizePolicy);
         webView_2->setProperty("url", QVariant(QUrl(QStringLiteral("about:blank"))));
 
-        formLayout->setWidget(1, QFormLayout::LabelRole, webView_2);
+        verticalLayout_5->addWidget(webView_2);
+
+        pushButton_forgetMe = new QPushButton(tab_4);
+        pushButton_forgetMe->setObjectName(QStringLiteral("pushButton_forgetMe"));
+
+        verticalLayout_5->addWidget(pushButton_forgetMe);
 
         tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
@@ -464,7 +465,7 @@ public:
 
         retranslateUi(DownloaderUI);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(4);
         tabWidget_2->setCurrentIndex(0);
 
 
