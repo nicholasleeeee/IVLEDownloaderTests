@@ -50,7 +50,7 @@ public:
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QStringLiteral("SettingsDialog"));
         SettingsDialog->setWindowModality(Qt::NonModal);
-        SettingsDialog->resize(400, 314);
+        SettingsDialog->resize(400, 317);
         QIcon icon;
         icon.addFile(QStringLiteral(":/icons/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         SettingsDialog->setWindowIcon(icon);
@@ -176,7 +176,7 @@ public:
         label_3->setText(QApplication::translate("SettingsDialog", "Do not download files larger than", 0));
         spinBox->setSuffix(QApplication::translate("SettingsDialog", "mb", 0));
         label_4->setText(QApplication::translate("SettingsDialog", "Note that files that are already downloaded will not be deleted - you will have to do this yourself", 0));
-        pushButton_4->setText(QApplication::translate("SettingsDialog", "IVLE Downloader", 0));
+        pushButton_4->setText(QApplication::translate("SettingsDialog", "Offline IVLE", 0));
         pushButton_5->setText(QApplication::translate("SettingsDialog", "Parse API key", 0));
         pushButton_3->setText(QApplication::translate("SettingsDialog", "Extremely hacky advance stuff", 0));
     } // retranslateUi
