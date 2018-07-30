@@ -3,13 +3,13 @@
 #include "lapi.h"
 #include <QSplashScreen>
 #include <QTimer>
+#include <QNetworkAccessManager>
 int main(int argc, char *argv[])
 {
-
     QApplication a(argc, argv);
-    a.setOrganizationName("YYJHAO");
-    a.setApplicationName("IVLE Downloader");
-
+    a.setOrganizationName("Vincent");
+    a.setApplicationName("Offline IVLE");
+    //CREATES A SPLASH SCREEN
     QSplashScreen *splashed=new QSplashScreen;
     splashed->setPixmap(QPixmap(":/icons/transparentlogo.png"));
     splashed->show();

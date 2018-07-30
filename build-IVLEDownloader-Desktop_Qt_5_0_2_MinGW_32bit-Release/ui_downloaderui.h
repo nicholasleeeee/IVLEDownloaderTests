@@ -465,7 +465,7 @@ public:
 
         retranslateUi(DownloaderUI);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(3);
         tabWidget_2->setCurrentIndex(0);
 
 
@@ -474,7 +474,7 @@ public:
 
     void retranslateUi(QDialog *DownloaderUI)
     {
-        DownloaderUI->setWindowTitle(QApplication::translate("DownloaderUI", "IVLE Downloader", 0));
+        DownloaderUI->setWindowTitle(QApplication::translate("DownloaderUI", "Offline IVLE", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("DownloaderUI", "Files", 0));
         tabWidget_2->setTabText(tabWidget_2->indexOf(nouse1), QApplication::translate("DownloaderUI", "Tab 1", 0));
         tabWidget_2->setTabText(tabWidget_2->indexOf(y), QApplication::translate("DownloaderUI", "Tab 2", 0));

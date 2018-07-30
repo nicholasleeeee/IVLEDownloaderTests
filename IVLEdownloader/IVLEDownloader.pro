@@ -15,7 +15,7 @@ macx{
 
 TARGET = IVLEDownloader
 TEMPLATE = app
-
+ICON = OIVLE.png
 
 DEFINES +=  QT_DEPRECATED_WARNINGS\
             MAXRECENT=5

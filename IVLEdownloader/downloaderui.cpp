@@ -36,12 +36,15 @@ DownloaderUI::DownloaderUI(QWidget *parent) :
     ui(new Ui::DownloaderUI)
 {
     ui->setupUi(this);
+    this->setWindowTitle("    Offline IVLE");
+    this->setWindowIcon(QPixmap(":/icons/OIVLE.png"));
     setupFiles(DIRECTORY);//FILES TAB //change directory to make it your own path
     initDB();//Datebase creation & to-do-list implementation
     initParser();//ANNOUNCEMENT UI && Exams parsing UI
     ui->webView->load(QUrl("https://www.nuswhispers.com/home/")); //Add NUSWhispers
     setTableHeaders();//Adding CAP calculator
-    startOutlook();
+    startOutlook();//Adds outlook tab
+    this->setWindowFlags(Qt::Window);
 
 }
 void DownloaderUI::initParser()
@@ -363,12 +366,18 @@ void DownloaderUI::on_pushButton_2_clicked()
     else{
         QString mod=add.Module();
         QString grade=add.Grade();
+        int Dgrade=add.diffGrade();
         float units=add.Creditunits();
 
         //qDebug()<<mod<<grade<<units;
         previousCAP=totalcreditunits*CAP;//takes the previous cap
         totalcreditunits+=units;//total units
+        if(Dgrade==0){
         gradescore=convert[grade];
+        }else {
+            gradescore=Dgrade;
+            grade="User's Value";
+        }
         CAP=(gradescore*units+previousCAP)/totalcreditunits;
         //qDebug()<<gradescore<<units<<previousCAP<<totalcreditunits;
 

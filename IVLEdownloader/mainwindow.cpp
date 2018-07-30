@@ -11,11 +11,15 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
 //    db.setDatabaseName(DIRECTORY);
     //creating the UI
+
     APIKEY=GetMyValue("KEY","NULL").toString();
 
     this->setWindowFlags((Qt::WindowFlags) (Qt::Window | Qt::WindowStaysOnTopHint | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint  & (~Qt::WindowFullscreenButtonHint)) );
     ui->setupUi(this);
 
+    //CODE TO CHECK INTERNET CONNECTION if not dont open
+    checkCon();
+    if(failedcon==1)delete this;
 
     this->setAttribute(Qt::WA_QuitOnClose,false);
 
@@ -136,37 +140,29 @@ MainWindow::MainWindow(QWidget *parent) :
         settingsDialog->setDlText(QString("Download to: %1").arg(settings->directory()));
         processToken(settings->token());
     }
-
+//========================================ADDED to make the UI for first time login and subsequent logins=================
     webviewDialog = new QDialog(this);// an object that is shown in the UI, code below will set the settings of the Dialog box seen
     webviewDialog->setLayout(new QBoxLayout(QBoxLayout::LeftToRight));
     webviewDialog->setAttribute(Qt::WA_QuitOnClose,false);
     webView = new QWebView(webviewDialog);
     webviewDialog->layout()->addWidget(webView);
     webviewDialog->layout()->setMargin(0);
-    SetMyValue("KEY","NULL");
-    if (GetMyValue("KEY","NULL").toString().length()!=21){
+    //SetMyValue("KEY","NULL");
+    if (GetMyValue("KEY","NULL").toString().length()!=21){//FOR FIRST TIME USERS
         ivleLoginPage();
         getAPIkey();
-        //qDebug()<<GetMyValue("KEY","Does not exist");
         QString keys=GetMyValue("KEY","h").toString();
-        //qDebug()<<keys;
-//        DownloaderUI UI;
-//        UI.setWindowFlags(Qt::Window);
-//        UI.setModal(true);
-//        UI.exec();
 
-    } else {
+    } else {//================================================FOR SUBSESQUENT USERS
         QString keys=GetMyValue("KEY","h").toString();
         //qDebug()<<keys;
         DownloaderUI UI;
-        UI.setWindowFlags(Qt::Window);//add this to set windowflags
         UI.setModal(true);
         UI.exec();
-
     }
 
 }
-
+//=======================================================================================================================
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -195,11 +191,27 @@ void MainWindow::parse(bool){
     QWebElement key = doc.findFirst("b");//function to find the first element in the HTML tag <b>
     APIKEY = key.toPlainText();
     SetMyValue("KEY",APIKEY);
-    //qDebug()<<GetMyValue("KEY","Does not exist");
+    qDebug()<<GetMyValue("KEY","Does not exist");
     QString keys=GetMyValue("KEY","h").toString();
     //qDebug()<<keys;
 }
-
+void MainWindow::checkCon()
+{
+    //CODE TO CHECK INTERNET CONNECTION if not dont open
+    QNetworkAccessManager nam;
+    QNetworkRequest req(QUrl("http://www.google.com"));
+    QNetworkReply *reply = nam.get(req);
+    QEventLoop loop;
+    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+    if(reply->bytesAvailable())failedcon=0;
+    //QMessageBox::information(this, "Info", "You are connected to the internet :)");
+    else{
+        QMessageBox::critical(this, "Info","You are not connected to the internet! This app cannot be opened without an internet connection, if you want to view your files go to the directory you saved at. Please try again after you have a stable connection!");
+        failedcon=1;
+    }
+    //============ENDS HERE============================================
+}
 
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason){
     icon->setIcon(normalIcon);

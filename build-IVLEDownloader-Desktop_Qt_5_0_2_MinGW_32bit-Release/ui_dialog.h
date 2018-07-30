@@ -29,7 +29,7 @@ QT_BEGIN_NAMESPACE
 class Ui_Dialog
 {
 public:
-    QHBoxLayout *horizontalLayout_5;
+    QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
@@ -40,6 +40,9 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_3;
     QComboBox *comboBox;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_4;
+    QLineEdit *lineEdit_2;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QDialogButtonBox *buttonBox;
@@ -49,8 +52,8 @@ public:
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QStringLiteral("Dialog"));
         Dialog->resize(400, 300);
-        horizontalLayout_5 = new QHBoxLayout(Dialog);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_6 = new QHBoxLayout(Dialog);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_2 = new QHBoxLayout();
@@ -77,6 +80,7 @@ public:
 
         spinBox = new QSpinBox(Dialog);
         spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setMaximum(160);
 
         horizontalLayout_3->addWidget(spinBox);
 
@@ -98,6 +102,21 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        label_4 = new QLabel(Dialog);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        horizontalLayout_5->addWidget(label_4);
+
+        lineEdit_2 = new QLineEdit(Dialog);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+
+        horizontalLayout_5->addWidget(lineEdit_2);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -114,7 +133,7 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
 
-        horizontalLayout_5->addLayout(verticalLayout);
+        horizontalLayout_6->addLayout(verticalLayout);
 
 
         retranslateUi(Dialog);
@@ -128,6 +147,8 @@ public:
         label->setText(QApplication::translate("Dialog", "Module:", 0));
         label_2->setText(QApplication::translate("Dialog", "Credit Units", 0));
         label_3->setText(QApplication::translate("Dialog", "Grade", 0));
+        label_4->setText(QApplication::translate("Dialog", "Score", 0));
+        lineEdit_2->setPlaceholderText(QApplication::translate("Dialog", "Fill this in if the grade you are using cannot be found in the score!", 0));
     } // retranslateUi
 
 };

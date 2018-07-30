@@ -40,9 +40,12 @@ public:
     QLabel *label_3;
     QSpinBox *spinBox;
     QLabel *label_4;
+    QSpacerItem *verticalSpacer_2;
+    QLabel *label_5;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton_4;
     QPushButton *pushButton_5;
+    QPushButton *pushButton_6;
     QPushButton *pushButton_3;
 
     void setupUi(QDialog *SettingsDialog)
@@ -50,7 +53,7 @@ public:
         if (SettingsDialog->objectName().isEmpty())
             SettingsDialog->setObjectName(QStringLiteral("SettingsDialog"));
         SettingsDialog->setWindowModality(Qt::NonModal);
-        SettingsDialog->resize(400, 317);
+        SettingsDialog->resize(486, 431);
         QIcon icon;
         icon.addFile(QStringLiteral(":/icons/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         SettingsDialog->setWindowIcon(icon);
@@ -138,6 +141,15 @@ public:
 
         verticalLayout->addWidget(label_4);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_2);
+
+        label_5 = new QLabel(SettingsDialog);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        verticalLayout->addWidget(label_5);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
@@ -151,6 +163,11 @@ public:
         pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
 
         verticalLayout->addWidget(pushButton_5);
+
+        pushButton_6 = new QPushButton(SettingsDialog);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+
+        verticalLayout->addWidget(pushButton_6);
 
         pushButton_3 = new QPushButton(SettingsDialog);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
@@ -176,8 +193,10 @@ public:
         label_3->setText(QApplication::translate("SettingsDialog", "Do not download files larger than", 0));
         spinBox->setSuffix(QApplication::translate("SettingsDialog", "mb", 0));
         label_4->setText(QApplication::translate("SettingsDialog", "Note that files that are already downloaded will not be deleted - you will have to do this yourself", 0));
+        label_5->setText(QApplication::translate("SettingsDialog", "Created by: Gerald Chua Deng Xiang & Nicholas Lee Wenhao", 0));
         pushButton_4->setText(QApplication::translate("SettingsDialog", "Offline IVLE", 0));
         pushButton_5->setText(QApplication::translate("SettingsDialog", "Parse API key", 0));
+        pushButton_6->setText(QApplication::translate("SettingsDialog", "FAQ", 0));
         pushButton_3->setText(QApplication::translate("SettingsDialog", "Extremely hacky advance stuff", 0));
     } // retranslateUi
 

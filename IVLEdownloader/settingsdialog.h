@@ -30,6 +30,7 @@ public slots:
     void setLabelText(const QString&);
     void setDlText(const QString&);
     void setDisplayedSettings(QVariantMap);
+    int checkCon();
 
 
 
@@ -51,6 +52,8 @@ private slots:
     void on_pushButton_5_clicked();
     void getAPIkey();
        void parse(bool);
+
+       void on_pushButton_6_clicked();
 
 signals:
     void gottenToken(QString);

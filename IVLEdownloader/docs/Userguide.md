@@ -1,4 +1,4 @@
-# IVLE Downloader - User guide:
+# Offline IVLE - User guide:
 [Developer Guide](https://github.com/Geraldcdx/IVLEDownloader/blob/master/docs/Developerguide.md)<br>
 [ReadMe](https://github.com/Geraldcdx/IVLEDownloader/blob/master/README.md)
   ## 1. Introduction
@@ -10,10 +10,10 @@
 ## 4. FAQ
 
 ### 1.Introduction
-The IVLE Downloader is the application that automatically downloads study material/announcements/exam details from the IVLE management system in National University of Singapore(NUS). This automation will remove the process of manually downloading files and hence saves a lot of time for you! Furthermore, you will be able to enjoy the addition features added into the application.
+The Offline IVLE is the application that automatically downloads study material/announcements/exam details from the IVLE management system in National University of Singapore(NUS). This automation will remove the process of manually downloading files and hence saves a lot of time for you! Furthermore, you will be able to enjoy the addition features added into the application.
 
-## 2. Download(This deployment is large because we have not cleaned up extra libraries yet)
-#### Download the IVLE Downloader https://github.com/Geraldcdx/IVLEDownloader/releases and download the deployment.zip(this may take about 20-30minutes):
+## 2. Download
+#### Go to the release link of Offline IVLE -> https://github.com/Geraldcdx/IVLEDownloader/releases and download the deployment.zip(this should take 5 mins):
 <p align="center"><img src="https://github.com/Geraldcdx/IVLEDownloader/blob/master/docs/pics/deployment3.png"width="800"></p>
 
 ## For Windows:
@@ -22,7 +22,7 @@ The IVLE Downloader is the application that automatically downloads study materi
 <p align="center"><img src="https://github.com/Geraldcdx/IVLEDownloader/blob/master/docs/pics/Files.png" width="500"></p>
 
 ## For MacOS:
-#### 1. After downloading the dmg file, launch IVLEDownloader.app
+#### 1. After downloading the dmg file, shift the app to your applications folder and launch IVLEDownloader.app
 <p align="center"><img src="https://github.com/Geraldcdx/IVLEDownloader/blob/master/docs/pics/MacDeploy1.png" width="500"></p>
 
 #### 2. If this pops out, simply click on 'OK'.
@@ -100,4 +100,10 @@ The IVLE Downloader is the application that automatically downloads study materi
 <p align="center"><img src="https://github.com/Geraldcdx/IVLEDownloader/blob/master/docs/pics/scalingprop3.png" width="500"></p>
 
 ### My Offline IVLE refuses to work!!!?
-#### Click on the IVLE API Parsing in the settings and try again, there might be bug in the settings. This setting will reset your API key and prevent errors from happening.
+#### Click on the IVLE API Parsing in the settings and try again. This setting will reset your API key and prevent errors from happening.
+
+### Problem with logging in/ enabling your APIKEY?
+#### Go to this url, https://ivle.nus.edu.sg/default.aspx?ReturnUrl=%2fLAPI%2fdefault.aspx, click on enable APIKEY. Relaunch Offline IVLE
+
+
+
